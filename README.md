@@ -1,57 +1,108 @@
-# 🤖 AI-Resume-Analyzer
+git clone [https://github.com/mohan-dev-portfolio/resumatch-ai.git](https://github.com/mohan-dev-portfolio/resumatch-ai.git)
 
-A modern, responsive single-page application built with HTML, Tailwind CSS, and **Google Gemini API**. Features instant resume scoring against job descriptions, keyword gap analysis, AI cover letter generation, and interview prep. Fully responsive with a sleek dark-mode glassmorphism design and client-side processing.
+# ResuMatch AI | Smart ATS Resume Scanner
 
-## 🚀 Features
+![GitHub last commit](https://img.shields.io/github/last-commit/mohan-dev-portfolio/resumatch-ai?style=flat-square)
+![GitHub license](https://img.shields.io/github/license/mohan-dev-portfolio/resumatch-ai?style=flat-square)
+![Responsive](https://img.shields.io/badge/Responsive-Yes-4f46e5?style=flat-square)
 
-- **ATS Simulator**: Simulate how Applicant Tracking Systems parse your resume
-- **Keyword Gap Analysis**: Identify missing hard and soft skills
-- **Instant Scoring**: Get a match score from 0-100%
-- **AI Cover Letter Generation**: Powered by Gemini API
-- **Interview Preparation**: Get personalized interview questions and tips
-- **Fully Responsive**: Modern design that works on all devices
+A modern, single-page **AI-Powered Resume Analyzer** designed to simulate Applicant Tracking Systems (ATS). This tool helps job seekers optimize their resumes by comparing them against job descriptions using client-side semantic matching algorithms. All analysis is done locally in your browser—no data ever leaves your device.
 
-## 🔧 Technology Stack
+---
 
-- **Frontend**: HTML5, Tailwind CSS, JavaScript
-- **AI Engine**: Google Gemini 2.5 Flash API
-- **Icons**: Font Awesome
-- **Fonts**: Plus Jakarta Sans (Google Fonts)
+## 🚀 Live Demo
 
-## 📝 Gemini API Integration
+[![View Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-4f46e5?style=for-the-badge)](https://your-github-pages-link)
 
-This application uses **Google Gemini API** (`gemini-2.5-flash-preview-09-2025`) for:
+> _Replace the above link with your actual GitHub Pages URL_
 
-1. **Resume Analysis**: Comparing resumes against job descriptions
-2. **Cover Letter Generation**: Creating tailored cover letters
-3. **Interview Prep**: Generating behavioral interview questions and tips
+---
 
-### API Usage Locations:
-- `script.js` - `callGemini()` function (line 92)
-- API Endpoint: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent`
-- Loading message: "COMMUNICATING WITH GEMINI AI..." (line 264)
+## ✨ Features
 
-### Setup:
-Add your Gemini API key to the `apiKey` variable in `script.js` (line 93).
+- **🚀 Instant Analysis:** Real-time parsing of Job Descriptions and Resumes without backend processing.
+- **📊 Smart Scoring Engine:** Calculates a "Match Percentage" based on keyword density, hard skills overlap, and formatting health.
+- **🔍 Gap Detection:** Identifies critical keywords missing from the resume that are present in the job description.
+- **📱 Fully Responsive:** Optimized for mobile and desktop with a modern "Glassmorphism" UI.
+- **🔒 Privacy First:** All analysis happens locally in the browser; no data is sent to any server.
+- **📄 Report Generation:** Download analysis results as a PDF (via Print) or Text file.
+- **🎨 Modern Design:** Built with Tailwind CSS for a polished, professional SaaS aesthetic.
 
-## 📁 Project Structure
+---
+
+## 🖼️ Preview
+
+<!-- Optionally add a GIF or screenshot here -->
+![Demo Screenshot](demo-screenshot.png)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES6+)
+- **Styling:** Tailwind CSS (CDN)
+- **Typography:** Google Fonts (Plus Jakarta Sans & Inter)
+- **Icons:** FontAwesome 6
+
+---
+
+## 📦 Project Structure
 
 ```
 AI-Resume-Analyzer/
-├── index.html      # Main HTML structure
-├── styles.css      # Custom CSS styles
-├── script.js       # JavaScript functionality & Gemini API integration
-└── README.md       # Documentation
+├── index.html      # Main HTML file
+├── style.css       # Custom styles
+├── script.js       # Main JavaScript logic
+├── README.md       # Documentation
 ```
 
-## 🎨 Design Features
+---
 
-- Dark mode glassmorphism design
-- Smooth animations and transitions
-- Responsive grid layouts
-- Custom scrollbars
-- Modern UI components
+## 🚦 How to Run
+
+1. **Clone the repository:**
+	```sh
+	git clone https://github.com/mohan-dev-portfolio/resumatch-ai.git
+	cd resumatch-ai
+	```
+2. **Open the Application:**
+	- Double-click `index.html` to open in your browser, or
+	- Use a local server (e.g., Live Server for VS Code) for best results.
+
+> _Requires an internet connection for CDN assets (Tailwind, FontAwesome, Google Fonts)._
+
+---
+
+## 💡 How It Works (The "AI" Logic)
+
+The "AI" component is simulated using advanced JavaScript text processing techniques:
+
+- **Tokenization:** The engine creates regex-based tokens from the Job Description.
+- **Stop-Word Removal:** Filters out common English words (e.g., "the", "and", "with") to isolate high-value keywords.
+- **Semantic Matching:** Compares the Resume against the Job Description tokens to find exact and partial matches.
+- **Weighted Scoring:**
+  - 70%: Content Relevance (Keyword overlap)
+  - 30%: Formatting Health (Presence of contact info, appropriate length, etc.)
+
+---
+
+## 🙋‍♂️ Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## 👤 Author
+
+**Mohan Prasath**  
+[🌐 Portfolio](https://mohan-dev-portfolio.github.io/Portfolio/)  
+[🐙 GitHub](https://github.com/mohan-dev-portfolio)  
+[💼 LinkedIn](https://www.linkedin.com/in/mohanprasath-dev/)
+
+---
 
 ## 📄 License
 
-Designed & Developed by Mohan Prasath - 2025 Edition
+This project is open source and available under the MIT License.
+
+> _Note: This project is a portfolio demonstration. While it simulates ATS logic effectively, actual enterprise ATS algorithms may vary._

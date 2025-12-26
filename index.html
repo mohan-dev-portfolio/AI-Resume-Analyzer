@@ -2,439 +2,413 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 AI Resume Analyzer | Optimize Your Career</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ResuMatch AI | Smart ATS Scanner</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- PDF.js for PDF text extraction -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts: Plus Jakarta Sans for headings, Inter for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
                     },
                     colors: {
-                        slate: {
-                            850: '#151e2e',
-                            950: '#020617',
+                        brand: {
+                            400: '#818cf8',
+                            500: '#6366f1', // Indigo
+                            600: '#4f46e5',
+                            glow: '#4f46e580',
+                        },
+                        dark: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617', // Richer dark background
                         }
                     },
                     animation: {
-                        'blob': 'blob 10s infinite',
-                        'fade-in': 'fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'shimmer': 'shimmer 2.5s infinite linear',
-                        'gradient': 'gradient 8s linear infinite',
+                        'spin-slow': 'spin 3s linear infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
                     },
                     keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
                         },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
+                        fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        shimmer: {
-                            '0%': { transform: 'translateX(-100%)' },
-                            '100%': { transform: 'translateX(100%)' },
-                        },
-                        gradient: {
-                            '0%, 100%': { 'background-position': '0% 50%' },
-                            '50%': { 'background-position': '100% 50%' },
                         }
                     }
                 }
             }
         }
     </script>
-</head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col overflow-x-hidden selection:bg-blue-500/30 selection:text-blue-200">
 
-    <!-- Modern Decorative Background -->
-    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full mix-blend-screen blur-[120px] animate-blob"></div>
-        <div class="absolute top-[20%] -right-[10%] w-[40%] h-[40%] bg-purple-600/10 rounded-full mix-blend-screen blur-[120px] animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-[10%] left-[20%] w-[40%] h-[40%] bg-emerald-600/10 rounded-full mix-blend-screen blur-[120px] animate-blob animation-delay-4000"></div>
-        <!-- Grid Pattern Overlay -->
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] opacity-20"></div>
-    </div>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-slate-300 antialiased min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white">
+
+    <!-- Background Effects -->
+    <div class="mesh-bg"></div>
+    <div class="glow-blob"></div>
 
     <!-- Navigation -->
-    <nav class="relative z-50 w-full px-4 sm:px-6 py-4 glass sticky top-0 border-b border-white/5">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2 cursor-pointer group" onclick="switchView('landing')">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300">
-                    <i class="fa-solid fa-atom text-white text-base sm:text-lg"></i>
+    <nav class="sticky top-0 z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 group cursor-pointer" onclick="window.location.reload()">
+                    <div class="relative">
+                        <i class="fa-solid fa-layer-group text-brand-500 text-2xl group-hover:animate-pulse"></i>
+                        <div class="absolute inset-0 bg-brand-500 blur-lg opacity-20"></div>
+                    </div>
+                    <span class="font-heading font-bold text-xl tracking-tight text-white">Resu<span class="text-brand-500">Match</span>.ai</span>
                 </div>
-                <span class="text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-blue-100 transition-colors">Resume<span class="text-blue-400">AI</span></span>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-6">
+                    <button onclick="document.getElementById('how-it-works').scrollIntoView({behavior: 'smooth'})" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">How it Works</button>
+                    <a href="https://mohan-dev-portfolio.github.io/Portfolio/" target="_blank" class="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all border border-white/10 hover:border-white/20">
+                        View Portfolio
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white p-2 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
-            <div>
-                <button onclick="switchView('app')" class="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-slate-900 border border-slate-700 hover:border-slate-500 hover:bg-slate-800 transition-all text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl hover:shadow-blue-900/20 active:scale-95">
-                    <span class="hidden sm:inline">Launch App</span>
-                    <span class="sm:hidden">App</span>
-                    <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 w-full glass border-b border-white/5 animate-fade-in-up bg-dark-950">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <button onclick="document.getElementById('how-it-works').scrollIntoView({behavior: 'smooth'}); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-white hover:bg-white/5 px-3 py-3 rounded-lg transition-colors">
+                    How it Works
                 </button>
+                <a href="https://mohan-dev-portfolio.github.io/Portfolio/" target="_blank" class="block text-slate-300 hover:text-white hover:bg-white/5 px-3 py-3 rounded-lg transition-colors">
+                    View Portfolio <i class="fa-solid fa-external-link-alt text-xs ml-1 opacity-50"></i>
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content Container -->
-    <main class="relative z-10 flex-grow flex flex-col">
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8 md:py-12 max-w-6xl">
         
-        <!-- View 1: Landing Page -->
-        <section id="landing-page" class="flex flex-col items-center justify-center pt-12 pb-24 px-4 w-full">
-            <!-- Hero -->
-            <div class="text-center max-w-5xl mx-auto mt-6 sm:mt-8 md:mt-16 mb-12 sm:mb-16 md:mb-24 px-4 animate-slide-up">
-                <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-6 sm:mb-8 shadow-glow">
-                    <span class="relative flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                    </span>
-                    AI Powered Analysis v2.0
-                </div>
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 sm:mb-8 leading-[1.1] tracking-tight text-white px-2">
-                    Optimize Your Career <br class="hidden sm:block"/>
-                    <span class="text-gradient">With Artificial Intelligence</span>
-                </h1>
-                <p class="text-slate-400 text-base sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed px-2 font-light">
-                    Stop guessing what recruiters want. Scan your resume against job descriptions instantly to identify gaps and boost your ranking.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full sm:w-auto">
-                    <button onclick="switchView('app')" class="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg shadow-xl shadow-blue-500/20 transition-all hover:scale-105 active:scale-95 overflow-hidden">
-                        <span class="relative z-10 flex items-center justify-center gap-2">
-                            Launch Analyzer
-                            <i class="fa-solid fa-arrow-right ml-1 group-hover:translate-x-1 transition-transform"></i>
-                        </span>
-                        <div class="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"></div>
-                    </button>
-                    <button onclick="openVideoModal()" class="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg text-slate-300 border border-slate-700 hover:bg-slate-800 hover:text-white transition-all hover:border-slate-600 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-circle-play text-blue-500 group-hover:text-blue-400 transition-colors"></i> View Demo
-                    </button>
+        <!-- Hero Section -->
+        <div class="text-center mb-12 md:mb-16 animate-fade-in-up input-section">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-6">
+                <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                AI-Powered Analysis V2.0
+            </div>
+            <h1 class="font-heading text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Optimize your resume <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-purple-400">in seconds.</span>
+            </h1>
+            <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                Leverage our advanced semantic matching algorithm to identify skill gaps and tailor your application for any ATS system.
+            </p>
+            
+            <!-- Demo Button -->
+            <button onclick="loadDemoData()" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors border-b border-dotted border-slate-600 hover:border-white pb-0.5">
+                <i class="fa-solid fa-bolt text-yellow-400"></i> Try with Demo Data
+            </button>
+        </div>
+
+        <!-- Input Section -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 animate-fade-in-up input-section" style="animation-delay: 0.1s;">
+            
+            <!-- Job Description Input -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-500 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-50 blur transition duration-500"></div>
+                <div class="relative glass-panel rounded-xl p-1 h-full">
+                    <div class="bg-dark-950/50 rounded-lg p-4 md:p-5 h-full flex flex-col modern-input">
+                        <div class="flex items-center justify-between mb-4">
+                            <label class="flex items-center gap-2 text-sm font-semibold text-white font-heading">
+                                <div class="w-8 h-8 rounded-lg bg-brand-500/20 flex items-center justify-center text-brand-400">
+                                    <i class="fa-solid fa-briefcase"></i>
+                                </div>
+                                Job Description
+                            </label>
+                            <span class="text-[10px] font-mono text-slate-500 border border-slate-800 px-2 py-1 rounded bg-black/40">PASTE TEXT</span>
+                        </div>
+                        <textarea id="jd-input" class="w-full h-64 md:h-80 bg-transparent border-0 resize-none focus:ring-0 text-base md:text-sm text-slate-300 placeholder-slate-600 leading-relaxed font-mono" placeholder="// Paste the full job description here...&#10;// Requirements, Responsibilities, Skills"></textarea>
+                    </div>
                 </div>
             </div>
 
-            <!-- Value Proposition Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto w-full px-4 animate-slide-up" style="animation-delay: 0.2s;">
-                <!-- Card 1 -->
-                <div class="glass-card p-6 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col items-start group relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fa-solid fa-robot text-blue-400 text-2xl"></i>
+            <!-- Resume Input -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl opacity-20 group-hover:opacity-50 blur transition duration-500"></div>
+                <div class="relative glass-panel rounded-xl p-1 h-full">
+                    <div class="bg-dark-950/50 rounded-lg p-4 md:p-5 h-full flex flex-col modern-input relative">
+                        <div class="flex items-center justify-between mb-4">
+                            <label class="flex items-center gap-2 text-sm font-semibold text-white font-heading">
+                                <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400">
+                                    <i class="fa-solid fa-file-code"></i>
+                                </div>
+                                Your Resume
+                            </label>
+                            <div class="flex gap-2">
+                                <label for="file-upload" class="cursor-pointer text-xs font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/10 px-3 py-1.5 rounded-lg transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-upload"></i> <span class="hidden sm:inline">Upload</span> .txt
+                                </label>
+                                <input id="file-upload" type="file" accept=".txt" class="hidden">
+                            </div>
+                        </div>
+                        <textarea id="resume-input" class="w-full h-64 md:h-80 bg-transparent border-0 resize-none focus:ring-0 text-base md:text-sm text-slate-300 placeholder-slate-600 leading-relaxed font-mono" placeholder="// Paste your resume text here...&#10;// Work Experience, Skills, Education"></textarea>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">ATS Simulator</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Simulate how Applicant Tracking Systems parse your resume. Ensure your formatting doesn't hide your skills.
-                    </p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="glass-card p-6 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col items-start group relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fa-solid fa-chart-pie text-purple-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Keyword Gap Analysis</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Identify exactly which hard and soft skills are missing from your resume compared to the job description.
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="glass-card p-6 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col items-start group relative overflow-hidden sm:col-span-2 lg:col-span-1">
-                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fa-solid fa-bolt text-emerald-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Instant Scoring</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Get a match score from 0-100% instantly, giving you a tangible metric to improve before applying.
-                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- View 2: Application -->
-        <section id="app-container" class="hidden flex-col items-center pt-8 pb-24 px-4 w-full max-w-[1400px] mx-auto animate-fade-in">
+        <!-- Action Button -->
+        <div class="flex justify-center mb-16 animate-fade-in-up input-section" style="animation-delay: 0.2s;">
+            <button onclick="analyzeResume()" class="group relative inline-flex items-center justify-center px-8 py-4 font-heading font-bold text-white transition-all duration-200 focus:outline-none w-full md:w-auto rounded-full md:rounded-none">
+                <div class="absolute inset-0 w-full h-full -mt-1 rounded-full opacity-30 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 blur-lg group-hover:opacity-60 transition-opacity duration-200"></div>
+                <div class="absolute inset-0 w-full h-full rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"></div>
+                <span class="relative flex items-center justify-center gap-3">
+                    Run AI Analysis
+                    <i class="fa-solid fa-wand-magic-sparkles group-hover:rotate-12 transition-transform duration-300"></i>
+                </span>
+            </button>
+        </div>
+
+        <!-- Loading State (Hidden by default) -->
+        <div id="loading-overlay" class="hidden fixed inset-0 z-50 bg-dark-950/80 backdrop-blur-md flex flex-col items-center justify-center transition-opacity duration-300 p-4 text-center">
+            <div class="relative mb-8">
+                <div class="w-24 h-24 rounded-full border-t-2 border-b-2 border-brand-500 animate-spin"></div>
+                <div class="w-16 h-16 rounded-full border-r-2 border-l-2 border-purple-500 animate-spin-slow absolute top-4 left-4"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <i class="fa-solid fa-brain text-white text-2xl animate-pulse"></i>
+                </div>
+            </div>
+            <h3 class="text-2xl font-heading font-bold text-white mb-2">Analyzing Compatibility</h3>
+            <p id="loading-text" class="text-slate-400 font-mono text-sm">Initializing neural engine...</p>
+        </div>
+
+        <!-- Results Section (Hidden by default) -->
+        <section id="results-section" class="hidden space-y-8 animate-fade-in-up">
             
-            <!-- Header for App Mode -->
-            <div class="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-3 sm:gap-4 px-2">
-                <button onclick="switchView('landing')" class="group text-slate-400 hover:text-white transition flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg hover:bg-white/5 text-sm sm:text-base">
-                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform"></i> <span>Back to Home</span>
-                </button>
-                <div class="flex items-center gap-2 text-xs font-mono text-slate-500 bg-slate-900 px-3 py-1.5 rounded-full border border-slate-800">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> System Online
-                </div>
-            </div>
+            <!-- Dashboard Header -->
+            <div class="glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden">
+                <!-- Decorative background elements -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
 
-            <!-- Input Area -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 w-full mb-8 sm:mb-10 px-2">
-                
-                <!-- Job Description Input -->
-                <div class="glass-card rounded-xl sm:rounded-2xl flex flex-col h-64 sm:h-80 md:h-96 lg:h-[500px] overflow-hidden group focus-within:ring-2 focus-within:ring-blue-500/30 transition-all">
-                    <div class="px-4 sm:px-5 py-2.5 sm:py-3 border-b border-white/5 flex flex-wrap gap-2 justify-between items-center bg-slate-900/50">
-                        <h3 class="font-semibold text-blue-300 flex items-center gap-2 text-xs sm:text-sm uppercase tracking-wide">
-                            <i class="fa-solid fa-briefcase text-xs sm:text-sm"></i> <span>Job Description</span>
-                        </h3>
-                        <div class="flex items-center gap-1.5 sm:gap-2">
-                            <label class="cursor-pointer text-[10px] sm:text-xs flex items-center gap-1 bg-slate-800 hover:bg-slate-700 hover:text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg transition-all text-slate-400 border border-slate-700">
-                                <i class="fa-solid fa-upload"></i> <span class="hidden xs:inline">Upload</span>
-                                <input type="file" class="hidden" accept=".txt,.doc,.docx,.pdf" onchange="handleFileUpload(event, 'jd-input')">
-                            </label>
-                            <button onclick="clearInput('jd-input')" class="text-xs text-slate-500 hover:text-red-400 transition p-1.5 sm:p-2 hover:bg-red-500/10 rounded-md sm:rounded-lg" aria-label="Clear input"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <textarea id="jd-input" class="flex-grow bg-transparent p-4 sm:p-5 resize-none focus:outline-none text-slate-300 text-sm sm:text-base leading-relaxed placeholder-slate-600 w-full font-light" placeholder="Paste the full job description here..."></textarea>
-                </div>
-
-                <!-- Resume Input -->
-                <div class="glass-card rounded-xl sm:rounded-2xl flex flex-col h-64 sm:h-80 md:h-96 lg:h-[500px] overflow-hidden group focus-within:ring-2 focus-within:ring-purple-500/30 transition-all">
-                    <div class="px-4 sm:px-5 py-2.5 sm:py-3 border-b border-white/5 flex flex-wrap gap-2 justify-between items-center bg-slate-900/50">
-                        <h3 class="font-semibold text-purple-300 flex items-center gap-2 text-xs sm:text-sm uppercase tracking-wide">
-                            <i class="fa-solid fa-file-lines text-xs sm:text-sm"></i> <span>Resume Text</span>
-                        </h3>
-                        <div class="flex items-center gap-1.5 sm:gap-2">
-                            <label class="cursor-pointer text-[10px] sm:text-xs flex items-center gap-1 bg-slate-800 hover:bg-slate-700 hover:text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg transition-all text-slate-400 border border-slate-700">
-                                <i class="fa-solid fa-upload"></i> <span class="hidden xs:inline">Upload</span>
-                                <input type="file" class="hidden" accept=".txt,.doc,.docx,.pdf" onchange="handleFileUpload(event, 'resume-input')">
-                            </label>
-                            <button onclick="pasteDemoData()" class="text-[10px] sm:text-xs text-blue-400 hover:text-blue-300 transition px-1.5 sm:px-2 hidden sm:block font-medium">Use Demo</button>
-                            <button onclick="clearInput('resume-input')" class="text-xs text-slate-500 hover:text-red-400 transition p-1.5 sm:p-2 hover:bg-red-500/10 rounded-md sm:rounded-lg" aria-label="Clear input"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <textarea id="resume-input" class="flex-grow bg-transparent p-4 sm:p-5 resize-none focus:outline-none text-slate-300 text-sm sm:text-base leading-relaxed placeholder-slate-600 w-full font-light" placeholder="Paste your resume content here..."></textarea>
-                </div>
-            </div>
-
-            <!-- Action Button -->
-            <div class="w-full flex justify-center mb-12 sm:mb-16 relative px-2">
-                <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="w-full border-t border-slate-800"></div>
-                </div>
-                <div class="relative">
-                    <button id="analyze-btn" onclick="analyzeResume()" class="group relative px-8 sm:px-12 py-4 sm:py-5 bg-slate-950 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg border border-slate-700 hover:border-blue-500/50 transition-all hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden shadow-2xl w-full sm:w-auto">
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <span class="relative z-10 flex items-center justify-center gap-2 sm:gap-3 text-white">
-                            <i class="fa-solid fa-wand-magic-sparkles text-blue-400 group-hover:rotate-12 transition-transform"></i> 
-                            <span>Analyze Match</span>
-                        </span>
-                        <!-- Border Gradient Animation -->
-                        <span class="absolute inset-0 rounded-xl sm:rounded-2xl ring-1 ring-inset ring-white/10 group-hover:ring-white/20"></span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Loading Overlay -->
-            <div id="loading-overlay" class="hidden fixed inset-0 z-[60] bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center transition-opacity duration-300">
-                <div class="relative w-32 h-32 mb-8">
-                    <div class="absolute inset-0 border-t-2 border-blue-500 rounded-full animate-spin opacity-75"></div>
-                    <div class="absolute inset-3 border-t-2 border-purple-500 rounded-full animate-spin animation-delay-200 opacity-75"></div>
-                    <div class="absolute inset-6 border-t-2 border-emerald-500 rounded-full animate-spin animation-delay-500 opacity-75"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <i class="fa-solid fa-brain text-slate-700 text-3xl animate-pulse"></i>
-                    </div>
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-2 tracking-tight">Processing Data</h3>
-                <p class="text-slate-400 text-sm font-light">Parsing keywords • Comparing skills • Generating insights</p>
-            </div>
-
-            <!-- Results Section -->
-            <div id="results-dashboard" class="hidden w-full animate-fade-in px-2">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 relative z-10">
                     
-                    <!-- Score Card (3 cols on desktop) -->
-                    <div class="md:col-span-4 lg:col-span-3 glass-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center relative overflow-hidden bg-slate-900/80">
-                        <h3 class="text-slate-400 text-xs uppercase tracking-[0.2em] font-bold mb-3 sm:mb-4">Match Score</h3>
+                    <!-- Score Chart -->
+                    <div class="relative w-40 h-40 md:w-48 md:h-48 flex-shrink-0 group">
+                        <div class="absolute inset-0 bg-brand-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                            <!-- Background Circle -->
+                            <path class="text-slate-800" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            <!-- Progress Circle -->
+                            <path id="score-circle" class="text-brand-500 transition-all duration-1000 ease-out drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]" 
+                                stroke-dasharray="0, 100" 
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span id="score-text" class="text-4xl md:text-5xl font-heading font-bold text-white tracking-tighter">0%</span>
+                            <span class="text-[10px] md:text-xs text-brand-400 font-semibold uppercase tracking-widest mt-1">Match Rate</span>
+                        </div>
+                    </div>
+
+                    <!-- Summary Text -->
+                    <div class="flex-grow text-center md:text-left w-full">
+                        <div id="verdict-badge" class="hidden inline-block px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-bold uppercase tracking-wider mb-3">Pending</div>
+                        <h2 id="verdict-title" class="text-2xl md:text-3xl font-heading font-bold text-white mb-3">Ready to Analyze</h2>
+                        <p id="verdict-desc" class="text-slate-400 mb-6 max-w-xl text-base md:text-lg">Our AI will break down your resume against the job description to find the perfect match.</p>
                         
-                        <div class="relative w-48 h-48 sm:w-56 sm:h-56">
-                            <svg viewBox="0 0 36 36" class="circular-chart text-blue-500 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                <path id="score-circle" class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke="currentColor" />
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span class="text-4xl sm:text-5xl font-extrabold text-white tracking-tighter" id="score-text">0%</span>
+                        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                            <div class="bg-dark-900/50 px-4 py-3 rounded-xl border border-white/5 backdrop-blur-sm flex-1 md:flex-none">
+                                <span class="block text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-1">Word Count</span>
+                                <span id="word-count" class="font-mono text-xl text-white">0</span>
                             </div>
-                        </div>
-                        <div id="score-verdict" class="px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs sm:text-sm font-semibold mt-3 sm:mt-4 text-slate-300 text-center max-w-full truncate" title="">
-                            Analyzing...
-                        </div>
-                    </div>
-
-                    <!-- Missing Keywords (Flexible width) -->
-                    <div class="md:col-span-8 lg:col-span-5 glass-card p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden flex flex-col">
-                        <div class="flex items-center justify-between mb-4 sm:mb-6">
-                            <div class="flex items-center gap-2 sm:gap-3">
-                                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-red-500/10 flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-triangle-exclamation text-red-400 text-sm sm:text-base"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-white font-bold text-base sm:text-lg">Missing Keywords</h3>
-                                    <p class="text-[10px] sm:text-xs text-slate-400">Found in JD, missing in Resume</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div id="missing-keywords-container" class="flex flex-wrap content-start gap-1.5 sm:gap-2 overflow-y-auto max-h-[250px] sm:max-h-[300px] pr-2 custom-scrollbar">
-                            <span class="text-slate-500 text-sm italic w-full text-center py-8">Run analysis to see missing keywords...</span>
-                        </div>
-                    </div>
-
-                    <!-- Action Plan (Full width on md, side on lg) -->
-                    <div class="md:col-span-12 lg:col-span-4 glass-card p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden flex flex-col">
-                        <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-list-check text-emerald-400 text-sm sm:text-base"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-white font-bold text-base sm:text-lg">Action Plan</h3>
-                                <p class="text-[10px] sm:text-xs text-slate-400">Immediate steps to improve</p>
-                            </div>
-                        </div>
-                        <div id="action-plan-container" class="space-y-2 sm:space-y-3 overflow-y-auto max-h-[250px] sm:max-h-[300px] pr-2 custom-scrollbar">
-                            <div class="p-4 bg-slate-800/30 rounded-xl border border-dashed border-slate-700 text-slate-500 text-sm text-center">
-                                Pending Analysis...
+                            <div class="bg-dark-900/50 px-4 py-3 rounded-xl border border-white/5 backdrop-blur-sm flex-1 md:flex-none">
+                                <span class="block text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-1">Hard Skills</span>
+                                <span id="skill-count" class="font-mono text-xl text-brand-400">0</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- AI Bonus Tools Section -->
-                    <div class="col-span-1 md:col-span-12 mt-4 sm:mt-6 pt-6 sm:pt-8 border-t border-slate-800">
-                        <h3 class="text-slate-200 font-bold mb-4 sm:mb-6 flex items-center gap-2 text-base sm:text-lg">
-                            <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-base sm:text-lg"></i> AI Career Assistant
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
-                            
-                            <!-- Tool 1 -->
-                            <button onclick="generateCoverLetter()" class="group glass-card p-4 sm:p-6 rounded-xl sm:rounded-2xl flex items-center gap-3 sm:gap-5 text-left hover:bg-slate-800 transition-all border border-slate-700 hover:border-blue-500/30 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/20 group-hover:scale-110 transition-all duration-300 z-10 shrink-0">
-                                    <i class="fa-solid fa-file-signature text-blue-400 text-xl sm:text-2xl"></i>
-                                </div>
-                                <div class="z-10 flex-1 min-w-0">
-                                    <h4 class="font-bold text-white text-base sm:text-lg group-hover:text-blue-300 transition-colors">Draft Cover Letter</h4>
-                                    <p class="text-xs sm:text-sm text-slate-400 mt-1 font-light">Generate a tailored cover letter instantly based on this match.</p>
-                                </div>
-                                <div class="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-0 translate-x-4">
-                                    <i class="fa-solid fa-chevron-right text-blue-500"></i>
-                                </div>
-                            </button>
-
-                            <!-- Tool 2 -->
-                            <button onclick="generateInterviewPrep()" class="group glass-card p-4 sm:p-6 rounded-xl sm:rounded-2xl flex items-center gap-3 sm:gap-5 text-left hover:bg-slate-800 transition-all border border-slate-700 hover:border-purple-500/30 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center group-hover:bg-purple-500/20 group-hover:scale-110 transition-all duration-300 z-10 shrink-0">
-                                    <i class="fa-solid fa-user-tie text-purple-400 text-xl sm:text-2xl"></i>
-                                </div>
-                                <div class="z-10 flex-1 min-w-0">
-                                    <h4 class="font-bold text-white text-base sm:text-lg group-hover:text-purple-300 transition-colors">Interview Prep</h4>
-                                    <p class="text-xs sm:text-sm text-slate-400 mt-1 font-light">Get likely questions & behavioral answers tips.</p>
-                                </div>
-                                <div class="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-0 translate-x-4">
-                                    <i class="fa-solid fa-chevron-right text-purple-500"></i>
-                                </div>
-                            </button>
-                        </div>
+                     <!-- Download Actions -->
+                     <div class="flex-shrink-0 w-full md:w-auto">
+                        <button onclick="downloadReport()" class="group bg-white/5 hover:bg-white/10 text-white px-6 py-4 rounded-xl flex items-center justify-center gap-3 transition-all border border-white/10 hover:border-white/20 w-full md:w-auto">
+                            <div class="bg-brand-500/20 p-2 rounded-lg text-brand-400 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-file-arrow-down"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block text-xs text-slate-400">Export Results</span>
+                                <span class="font-bold text-sm">Download PDF</span>
+                            </div>
+                        </button>
                     </div>
-
                 </div>
             </div>
 
+            <!-- Detailed Analysis Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Matching Keywords -->
+                <div class="glass-panel rounded-2xl p-5 md:p-6 h-full">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 border border-green-500/20">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <h3 class="text-lg font-heading font-bold text-white">Matched Keywords</h3>
+                        </div>
+                        <span class="text-xs text-green-400 font-mono bg-green-500/10 px-2 py-1 rounded">Keep these</span>
+                    </div>
+                    <div id="matched-keywords-container" class="flex flex-wrap gap-2 max-h-60 overflow-y-auto custom-scrollbar">
+                        <span class="text-slate-500 italic text-sm">No analysis run yet.</span>
+                    </div>
+                </div>
+
+                <!-- Missing Keywords -->
+                <div class="glass-panel rounded-2xl p-5 md:p-6 h-full border-l-4 border-l-red-500/50">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 border border-red-500/20">
+                                <i class="fa-solid fa-magnifying-glass-minus"></i>
+                            </div>
+                            <h3 class="text-lg font-heading font-bold text-white">Missing Keywords</h3>
+                        </div>
+                        <span class="text-xs text-red-400 font-mono bg-red-500/10 px-2 py-1 rounded">Critical Gaps</span>
+                    </div>
+                    <div id="missing-keywords-container" class="flex flex-wrap gap-2">
+                         <span class="text-slate-500 italic text-sm">No analysis run yet.</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Formatting & Suggestions -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Formatting Checks -->
+                <div class="glass-panel rounded-2xl p-5 md:p-6 lg:col-span-1">
+                    <h3 class="text-lg font-heading font-bold text-white mb-6">Formatting Health</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center justify-between p-3 rounded-lg bg-dark-900/50 border border-white/5">
+                            <span class="text-sm text-slate-300 flex items-center gap-2"><i class="fa-regular fa-envelope text-slate-500"></i> Email</span>
+                            <span id="check-email" class="text-slate-600"><i class="fa-solid fa-circle-question"></i></span>
+                        </li>
+                        <li class="flex items-center justify-between p-3 rounded-lg bg-dark-900/50 border border-white/5">
+                            <span class="text-sm text-slate-300 flex items-center gap-2"><i class="fa-solid fa-phone text-slate-500"></i> Phone</span>
+                            <span id="check-phone" class="text-slate-600"><i class="fa-solid fa-circle-question"></i></span>
+                        </li>
+                        <li class="flex items-center justify-between p-3 rounded-lg bg-dark-900/50 border border-white/5">
+                            <span class="text-sm text-slate-300 flex items-center gap-2"><i class="fa-solid fa-ruler-horizontal text-slate-500"></i> Length</span>
+                            <span id="check-length" class="text-slate-600"><i class="fa-solid fa-circle-question"></i></span>
+                        </li>
+                        <li class="flex items-center justify-between p-3 rounded-lg bg-dark-900/50 border border-white/5">
+                            <span class="text-sm text-slate-300 flex items-center gap-2"><i class="fa-brands fa-linkedin text-slate-500"></i> Links</span>
+                            <span id="check-link" class="text-slate-600"><i class="fa-solid fa-circle-question"></i></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- AI Suggestions -->
+                <div class="glass-panel rounded-2xl p-5 md:p-6 lg:col-span-2 relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <h3 class="text-lg font-heading font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="fa-regular fa-lightbulb text-yellow-400"></i> Action Plan
+                    </h3>
+                    <div id="suggestions-container" class="space-y-3">
+                         <div class="p-4 rounded-xl bg-dark-900/30 border border-dashed border-slate-700 text-sm text-slate-400 text-center">
+                             Run the analysis to generate a personalized action plan.
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- How it Works Modal / Section -->
+        <section id="how-it-works" class="mt-24 border-t border-white/5 pt-16 pb-8">
+            <h2 class="text-center text-2xl font-heading font-bold text-white mb-12">How Our Engine Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-6 rounded-2xl text-center group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-14 h-14 bg-brand-500/10 text-brand-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl border border-brand-500/20 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-3 text-lg">1. Tokenization</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">We parse the text into individual semantic tokens, identifying technical skills and soft skills relative to the industry.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-14 h-14 bg-purple-500/10 text-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl border border-purple-500/20 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-3 text-lg">2. Contextual Matching</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Our engine doesn't just look for exact words; it looks for frequency, context, and required vs. preferred qualifications.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl text-center group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-14 h-14 bg-pink-500/10 text-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl border border-pink-500/20 group-hover:bg-pink-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-3 text-lg">3. Scoring & Strategy</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">We calculate a compatibility score and provide a prioritized list of actionable improvements to beat the ATS.</p>
+                </div>
+            </div>
         </section>
 
     </main>
 
-    <!-- Generic AI Result Modal -->
-    <div id="ai-modal" class="hidden fixed inset-0 z-[70] bg-slate-950/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-4">
-        <div class="bg-slate-900 border border-slate-700 rounded-xl sm:rounded-2xl w-full max-w-3xl max-h-[90vh] sm:max-h-[85vh] flex flex-col shadow-2xl animate-slide-up ring-1 ring-white/10 relative overflow-hidden">
-            <!-- Modal Background Glow -->
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"></div>
-            
-            <!-- Modal Header -->
-            <div class="p-4 sm:p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900 z-10">
-                <h3 id="ai-modal-title" class="text-lg sm:text-xl font-bold text-white flex items-center gap-2 sm:gap-3 flex-1 min-w-0 pr-2">
-                    <!-- Title Injected Here -->
-                </h3>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-white transition w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-800 shrink-0" aria-label="Close modal">
-                    <i class="fa-solid fa-xmark text-base sm:text-lg"></i>
-                </button>
-            </div>
-            
-            <!-- Modal Content (Scrollable) -->
-            <div id="ai-modal-content" class="p-4 sm:p-6 md:p-8 overflow-y-auto custom-scrollbar text-slate-300 leading-relaxed space-y-3 sm:space-y-4 font-light text-sm sm:text-base bg-slate-900/50">
-                <!-- Content Injected Here -->
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="p-4 sm:p-5 border-t border-slate-800 bg-slate-900 z-10 flex justify-end gap-2 sm:gap-3 flex-wrap">
-                <button onclick="copyModalContent(event)" class="px-4 sm:px-5 py-2 sm:py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition flex items-center gap-2 border border-slate-700">
-                    <i class="fa-solid fa-copy"></i> <span>Copy</span>
-                </button>
-                <button onclick="closeModal()" class="px-4 sm:px-5 py-2 sm:py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold transition shadow-lg shadow-blue-500/20">Done</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Video Modal -->
-    <div id="video-modal" class="hidden fixed inset-0 z-[80] bg-slate-950/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-4 animate-fade-in">
-        <div class="relative w-full max-w-5xl aspect-video bg-black rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden border border-slate-700 ring-1 ring-white/10">
-            <button onclick="closeVideoModal()" class="absolute top-2 right-2 sm:top-4 sm:right-4 z-50 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-900/60 hover:bg-red-500/90 text-white backdrop-blur-md flex items-center justify-center transition-all border border-white/10" aria-label="Close video">
-                <i class="fa-solid fa-xmark text-sm sm:text-base"></i>
-            </button>
-            <div class="w-full h-full flex items-center justify-center bg-slate-900">
-                <iframe id="demo-video-frame" class="w-full h-full" src="" title="Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
-    <footer class="glass border-t border-white/5 mt-auto py-8 sm:py-10 z-10 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
-            <div class="text-center sm:text-left">
-                <p class="text-slate-400 text-xs sm:text-sm">Designed & Developed by <span class="text-white font-semibold">Mohan Prasath</span></p>
-                <div class="flex items-center gap-2 mt-2 justify-center sm:justify-start">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <p class="text-slate-600 text-[10px] sm:text-xs font-mono">v2.0.0 • 2025 Edition</p>
+    <footer class="border-t border-white/5 bg-dark-950/80 backdrop-blur-xl mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+                         <i class="fa-solid fa-layer-group text-brand-500"></i>
+                         <p class="font-heading font-bold text-white text-lg">ResuMatch.ai</p>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        Built with <i class="fa-solid fa-heart text-red-500 mx-1"></i> by 
+                        <a href="https://mohan-dev-portfolio.github.io/Portfolio/" target="_blank" class="text-brand-400 hover:text-brand-300 font-semibold transition-colors">Mohan Prasath</a>
+                    </p>
                 </div>
-            </div>
-            <div class="flex gap-4 sm:gap-6">
-                <a href="https://github.com/mohan-dev-portfolio" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-all hover:scale-110 border border-slate-700" aria-label="GitHub">
-                    <i class="fa-brands fa-github text-base sm:text-lg"></i>
-                </a>
-                <a href="https://mohan-dev-portfolio.github.io/Portfolio/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-purple-400 hover:bg-slate-700 transition-all hover:scale-110 border border-slate-700" aria-label="Portfolio">
-                    <i class="fa-solid fa-globe text-base sm:text-lg"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/mohanprasath21/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:bg-slate-700 transition-all hover:scale-110 border border-slate-700" aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin text-base sm:text-lg"></i>
-                </a>
+                
+                <div class="flex flex-col items-center md:items-end gap-3">
+                    <div class="flex items-center gap-4">
+                        <a href="https://mohan-dev-portfolio.github.io/Portfolio/" target="_blank" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">
+                            Portfolio
+                        </a>
+                        <span class="text-slate-700">|</span>
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/mohan-dev-portfolio" target="_blank" class="text-slate-400 hover:text-white hover:scale-110 transition-all" title="GitHub">
+                                <i class="fa-brands fa-github text-xl"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/mohanprasath21" target="_blank" class="text-slate-400 hover:text-blue-400 hover:scale-110 transition-all" title="LinkedIn">
+                                <i class="fa-brands fa-linkedin text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600">
+                        &copy; 2025 Mohan Prasath. All rights reserved.
+                    </p>
+                </div>
             </div>
         </div>
     </footer>
-
-    <!-- External JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
