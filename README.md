@@ -1,20 +1,6 @@
-git clone [https://github.com/mohan-dev-portfolio/resumatch-ai.git](https://github.com/mohan-dev-portfolio/resumatch-ai.git)
-
 # ResuMatch AI | Smart ATS Resume Scanner
 
-![GitHub last commit](https://img.shields.io/github/last-commit/mohan-dev-portfolio/resumatch-ai?style=flat-square)
-![GitHub license](https://img.shields.io/github/license/mohan-dev-portfolio/resumatch-ai?style=flat-square)
-![Responsive](https://img.shields.io/badge/Responsive-Yes-4f46e5?style=flat-square)
-
 A modern, single-page **AI-Powered Resume Analyzer** designed to simulate Applicant Tracking Systems (ATS). This tool helps job seekers optimize their resumes by comparing them against job descriptions using client-side semantic matching algorithms. All analysis is done locally in your browser—no data ever leaves your device.
-
----
-
-## 🚀 Live Demo
-
-[![View Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-4f46e5?style=for-the-badge)](https://your-github-pages-link)
-
-> _Replace the above link with your actual GitHub Pages URL_
 
 ---
 
@@ -33,7 +19,7 @@ A modern, single-page **AI-Powered Resume Analyzer** designed to simulate Applic
 ## 🖼️ Preview
 
 <!-- Optionally add a GIF or screenshot here -->
-![Demo Screenshot](demo-screenshot.png)
+![Demo Screenshot](image.png)
 
 ---
 
@@ -62,8 +48,8 @@ AI-Resume-Analyzer/
 
 1. **Clone the repository:**
 	```sh
-	git clone https://github.com/mohan-dev-portfolio/resumatch-ai.git
-	cd resumatch-ai
+	git clone https://github.com/mohan-dev-portfolio/AI-Resume-Analyzer.git
+	cd AI-Resume-Analyzer
 	```
 2. **Open the Application:**
 	- Double-click `index.html` to open in your browser, or
